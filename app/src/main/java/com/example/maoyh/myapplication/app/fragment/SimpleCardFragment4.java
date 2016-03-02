@@ -18,14 +18,14 @@ import java.util.ArrayList;
 /**
  * Created by MAOYH on 2016/3/2.
  */
-public class SimpleCardFragment extends Fragment {
+public class SimpleCardFragment4 extends Fragment {
     private ArrayList<Fragment> mFragments;
-    private String[] mTitles = {"已发货", "未发货",};
+    private String[] mTitles = {"已付款", "未付款",};
     private ViewPager mViewPager;
     private SegmentTabLayout mTabLayout;
 
-    public static SimpleCardFragment getInstance() {
-        SimpleCardFragment sf = new SimpleCardFragment();
+    public static SimpleCardFragment4 getInstance() {
+        SimpleCardFragment4 sf = new SimpleCardFragment4();
 
         return sf;
     }
@@ -37,13 +37,13 @@ public class SimpleCardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.layout_fragment, null);
+        View v = inflater.inflate(R.layout.layout_fragment4, null);
         mTabLayout = (SegmentTabLayout) v.findViewById(R.id.tl_1);
         mFragments = new ArrayList<>();
         for (String title : mTitles) {
             mFragments.add(SecondFragment.getInstance("Switch ViewPager " + title));
         }
-        mViewPager = (ViewPager)v.findViewById(R.id.vp);
+        mViewPager = (ViewPager)v.findViewById(R.id.vp4);
         mViewPager.setAdapter(new MyPagerAdapter(getFragmentManager(),mFragments,mTitles));
         mTabLayout.setTabData(mTitles);
         mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {

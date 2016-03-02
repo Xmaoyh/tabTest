@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.maoyh.myapplication.app.R;
 import com.example.maoyh.myapplication.app.entity.TabEntity;
 import com.example.maoyh.myapplication.app.fragment.SimpleCardFragment;
+import com.example.maoyh.myapplication.app.fragment.SimpleCardFragment2;
+import com.example.maoyh.myapplication.app.fragment.SimpleCardFragment3;
+import com.example.maoyh.myapplication.app.fragment.SimpleCardFragment4;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 
@@ -44,9 +47,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        for (String title : mTitles) {
-            mFragments.add(SimpleCardFragment.getInstance( title));
-        }
+
+            mFragments.add(SimpleCardFragment.getInstance());
+            mFragments.add(SimpleCardFragment2.getInstance());
+            mFragments.add(SimpleCardFragment3.getInstance());
+            mFragments.add(SimpleCardFragment4.getInstance());
+
         //设置tab的标题、选中图标、未选中图标
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
