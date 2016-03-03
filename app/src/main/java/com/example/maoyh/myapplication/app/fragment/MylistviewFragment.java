@@ -1,5 +1,6 @@
 package com.example.maoyh.myapplication.app.fragment;
 
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -7,32 +8,32 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.maoyh.myapplication.app.R;
+import com.example.maoyh.myapplication.app.adpter.ListviewItemAdpter;
 import com.example.maoyh.myapplication.app.utils.RefreshLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by MAOYH on 2016/3/2.
+ * Created by MAOYH on 2016/3/3.
  */
+public class MylistviewFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,RefreshLayout.OnLoadListener {
 
-/**
- * Created by MAOYH on 2016/3/2.
- */
-public class SecondFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,RefreshLayout.OnLoadListener  {
-    private String mTitle;
     private RefreshLayout swipe_container;
     private ListView lv;
-    private ArrayList<String> list;
-    private ArrayAdapter<String> stringArrayAdapter;
+    private List<Integer> data_icon;
+    private List<String> data_title;
+    private List<String> data_content;
+    private ListviewItemAdpter mlistViewAdpter;
 
-    public static SecondFragment getInstance(String title) {
-        SecondFragment sf = new SecondFragment();
-        sf.mTitle = title;
-        return sf;
+
+    public static MylistviewFragment getInstance() {
+        MylistviewFragment mf = new MylistviewFragment();
+
+        return mf;
     }
 
     @Override
@@ -42,26 +43,26 @@ public class SecondFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.layout_secondfragment, null);
-        //TextView card_title_tv = (TextView) v.findViewById(R.id.card_title_tv);
-        // card_title_tv.setText(mTitle);
-        swipe_container = (RefreshLayout) v.findViewById(R.id.swipe_container);
-        lv = (ListView) v.findViewById(R.id.lv);
+        View v = inflater.inflate(R.layout.layout_listviewfragment, null);
+        swipe_container = (RefreshLayout) v.findViewById(R.id.swipe_container_list);
+        lv = (ListView) v.findViewById(R.id.lv_list);
         initData();
-
-
         return v;
     }
 
     private void initData() {
         swipe_container.setOnRefreshListener(this);
         swipe_container.setOnLoadListener(this);
-        list = new ArrayList<>();
+        data_icon = new ArrayList<>();
+        data_title = new ArrayList<>();
+        data_content = new ArrayList<>();
         for (int i = 0;i<20;i++){
-            list.add(i+"个数据");
+            data_icon.add(R.mipmap.ic_launcher);
+            data_title.add(i+"个新闻标题");
+            data_content.add(i+"个新闻内容");
         }
-        stringArrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,list);
-        lv.setAdapter(stringArrayAdapter);
+        mlistViewAdpter = new ListviewItemAdpter(getActivity(),data_title,data_content,data_icon);
+        lv.setAdapter(mlistViewAdpter);
         //设置刷新动画的颜色
         swipe_container.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
@@ -73,8 +74,10 @@ public class SecondFragment extends Fragment implements SwipeRefreshLayout.OnRef
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                list.add(0, "下拉刷新的数据");
-                stringArrayAdapter.notifyDataSetChanged();
+                data_icon.add(0,R.mipmap.ic_launcher);
+                data_title.add(0,"增加新闻标题");
+                data_content.add(0,"增加新闻内容");
+               mlistViewAdpter.notifyDataSetChanged();
                 //结束刷新 更改动画
                 swipe_container.setRefreshing(false);
             }
@@ -86,8 +89,10 @@ public class SecondFragment extends Fragment implements SwipeRefreshLayout.OnRef
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                list.add(list.size(), "加载更多的数据");
-                stringArrayAdapter.notifyDataSetChanged();
+                data_icon.add(R.mipmap.ic_launcher);
+                data_title.add("增加新闻标题");
+                data_content.add("增加新闻内容");
+                mlistViewAdpter.notifyDataSetChanged();
                 //结束动画
                 swipe_container.setLoading(false);
 

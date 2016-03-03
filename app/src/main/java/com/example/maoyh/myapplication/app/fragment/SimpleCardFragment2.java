@@ -41,7 +41,8 @@ public class SimpleCardFragment2 extends Fragment {
         mTabLayout = (SegmentTabLayout) v.findViewById(R.id.tl_1);
         mFragments = new ArrayList<>();
         for (String title : mTitles) {
-            mFragments.add(SecondFragment.getInstance("Switch ViewPager " + title));
+             mFragments.add( MylistviewFragment.getInstance());
+
         }
         mViewPager = (ViewPager)v.findViewById(R.id.vp2);
         mViewPager.setAdapter(new MyPagerAdapter(getFragmentManager(),mFragments,mTitles));
@@ -74,7 +75,7 @@ public class SimpleCardFragment2 extends Fragment {
 
             }
         });
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(0);
 
 
         return v;

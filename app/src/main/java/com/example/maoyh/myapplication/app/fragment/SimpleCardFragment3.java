@@ -74,7 +74,7 @@ public class SimpleCardFragment3 extends Fragment {
 
             }
         });
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(0);
 
 
         return v;
