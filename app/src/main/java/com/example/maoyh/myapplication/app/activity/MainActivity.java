@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setTabData(mTabEntities, this, R.id.fl_change, mFragments);
         //设置红点
         mTabLayout.showDot(1);
+        mTabLayout.showMsg(0,88);
 
     }
 
