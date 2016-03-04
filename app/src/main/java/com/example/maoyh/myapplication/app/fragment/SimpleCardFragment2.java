@@ -40,10 +40,12 @@ public class SimpleCardFragment2 extends Fragment {
         View v = inflater.inflate(R.layout.layout_fragment2, null);
         mTabLayout = (SegmentTabLayout) v.findViewById(R.id.tl_1);
         mFragments = new ArrayList<>();
-        for (String title : mTitles) {
-             mFragments.add( MylistviewFragment.getInstance());
-
-        }
+//        for (String title : mTitles) {
+//             mFragments.add( MylistviewFragment.getInstance());
+//
+//        }
+        mFragments.add( MylistviewFragment.getInstance());
+        mFragments.add( new TestFragment());
         mViewPager = (ViewPager)v.findViewById(R.id.vp2);
         mViewPager.setAdapter(new MyPagerAdapter(getFragmentManager(),mFragments,mTitles));
         mTabLayout.setTabData(mTitles);

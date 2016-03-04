@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerArr">
+        <item>北京</item>
+        <item>上海</item>
+        <item>广州</item>
+        <item>深圳</item>
+    </string-array>
+
+    <string-array name="data_autoText">
+        <item>张三</item>
+        <item>李四</item>
+        <item>王五</item>
+        <item>赵六</item>
+        <item>老司机</item>
+        <item>新司机</item>
+        <item>张建生</item>
+        <item>张瑟</item>
+        <item>张丽</item>
+    </string-array>
+</resources>
