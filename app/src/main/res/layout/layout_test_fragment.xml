@@ -26,4 +26,12 @@
         android:id="@+id/tv_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <GridView
+        android:id="@+id/mygrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="auto_fit"
+        >
+    </GridView>
+
 </LinearLayout>

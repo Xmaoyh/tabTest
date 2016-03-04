@@ -18,4 +18,21 @@
         <item>张瑟</item>
         <item>张丽</item>
     </string-array>
+    <string-array name="data_gridview_1">
+        <item>待接单</item>
+        <item>开单</item>
+        <item>物流查询</item>
+        <item>待接送货</item>
+        <item>库存/配载</item>
+        <item>车辆跟踪</item>
+    </string-array>
+    <string-array name="data_gridview_2">
+        <item>专员管理</item>
+        <item>车辆管理</item>
+        <item>司机管理</item>
+        <item>计价方式</item>
+        <item>客户经理</item>
+    </string-array>
+
+
 </resources>
