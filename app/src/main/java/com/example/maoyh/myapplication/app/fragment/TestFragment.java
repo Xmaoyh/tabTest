@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.maoyh.myapplication.app.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,27 +28,32 @@ import java.util.Map;
 public class TestFragment extends Fragment {
     private GridView gridView;
     private SimpleAdapter simpleAdapter;
-    private List<Map<String,Object>> gridviewData;
-    private int[] icon = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
-    private String[] text = {"待接单","开单","物流查询","待接送货","库存/配载","车辆跟踪"};
+    private List<Map<String, Object>> gridviewData;
+    private int[] icon = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+    private String[] text = {"待接单", "开单", "物流查询", "待接送货", "库存/配载", "车辆跟踪"};
     private AutoCompleteTextView autoCompleteTextView;
     private ArrayAdapter arrayAdapter;
     private Spinner spinner;
     private TextView textView;
-    private String city,name,show;
+    private String city, name, show;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v =   inflater.inflate(R.layout.layout_test_fragment,null);
+        View v = inflater.inflate(R.layout.layout_test_fragment, null);
         autoCompleteTextView = (AutoCompleteTextView) v.findViewById(R.id.autotext);
         textView = (TextView) v.findViewById(R.id.tv_show);
         spinner = (Spinner) v.findViewById(R.id.spinner);
         gridView = (GridView) v.findViewById(R.id.mygrid);
+        gridviewData = new ArrayList<>();
         getGridviewData();
-        simpleAdapter = new SimpleAdapter(getContext(),getGridviewData(),R.layout.gridview_item,text,icon);
+        String[] from = {"image", "text"};
+        int[] to = {R.id.girdview_ItemImage,R.id.girdview_ItemText};
+        simpleAdapter = new SimpleAdapter(getContext(), gridviewData, R.layout.gridview_item, from, to);
         gridView.setAdapter(simpleAdapter);
-        arrayAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.data_autoText));
+
+        arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.data_autoText));
         //设置输入第一个字符就进行提示
         autoCompleteTextView.setThreshold(1);
         autoCompleteTextView.setAdapter(arrayAdapter);
@@ -73,14 +79,14 @@ public class TestFragment extends Fragment {
             }
         });
 
-        return  v;
+        return v;
     }
 
-    private List<Map<String, Object>> getGridviewData() {
-        for(int i = 0;i < icon.length;i++) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("iamge",icon[i]);
-            map.put("text",text[i]);
+    public List<Map<String, Object>> getGridviewData() {
+        for (int i = 0; i < icon.length; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("image", icon[i]);
+            map.put("text", text[i]);
             gridviewData.add(map);
         }
         return gridviewData;
