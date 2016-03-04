@@ -18,5 +18,5 @@
         android:paddingLeft="5dp"
         android:text="加载更多"
         android:textColor="#9b9ea1"
-        android:textSize="13sp" />
+        android:textSize="20sp" />
 </RelativeLayout>

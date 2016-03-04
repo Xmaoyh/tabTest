@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.example.maoyh.myapplication.app.R;
 import com.example.maoyh.myapplication.app.adpter.ListviewItemAdpter;
+import com.example.maoyh.myapplication.app.entity.ListEntity;
 import com.example.maoyh.myapplication.app.utils.RefreshLayout;
 
 import java.util.ArrayList;
@@ -20,13 +21,11 @@ import java.util.List;
 /**
  * Created by MAOYH on 2016/3/3.
  */
-public class MylistviewFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,RefreshLayout.OnLoadListener {
+public class MylistviewFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RefreshLayout.OnLoadListener {
 
     private RefreshLayout swipe_container;
     private ListView lv;
-    private List<Integer> data_icon;
-    private List<String> data_title;
-    private List<String> data_content;
+    private List<ListEntity> data;
     private ListviewItemAdpter mlistViewAdpter;
 
 
@@ -53,15 +52,11 @@ public class MylistviewFragment extends Fragment implements SwipeRefreshLayout.O
     private void initData() {
         swipe_container.setOnRefreshListener(this);
         swipe_container.setOnLoadListener(this);
-        data_icon = new ArrayList<>();
-        data_title = new ArrayList<>();
-        data_content = new ArrayList<>();
-        for (int i = 0;i<20;i++){
-            data_icon.add(R.mipmap.ic_launcher);
-            data_title.add(i+"个新闻标题");
-            data_content.add(i+"个新闻内容");
+        data = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            data.add(new ListEntity(R.mipmap.ic_launcher, i + "个新闻标题", i + "个新闻内容"));
         }
-        mlistViewAdpter = new ListviewItemAdpter(getActivity(),data_title,data_content,data_icon);
+        mlistViewAdpter = new ListviewItemAdpter(getActivity(), data);
         lv.setAdapter(mlistViewAdpter);
         //设置刷新动画的颜色
         swipe_container.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
@@ -74,14 +69,12 @@ public class MylistviewFragment extends Fragment implements SwipeRefreshLayout.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                data_icon.add(0,R.mipmap.ic_launcher);
-                data_title.add(0,"增加新闻标题");
-                data_content.add(0,"增加新闻内容");
-               mlistViewAdpter.notifyDataSetChanged();
+                data.add(0, new ListEntity(R.mipmap.ic_launcher, "增加新闻标题", "增加新闻内容"));
+                mlistViewAdpter.notifyDataSetChanged();
                 //结束刷新 更改动画
                 swipe_container.setRefreshing(false);
             }
-        },2000);
+        }, 2000);
     }
 
     @Override
@@ -89,9 +82,7 @@ public class MylistviewFragment extends Fragment implements SwipeRefreshLayout.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                data_icon.add(R.mipmap.ic_launcher);
-                data_title.add("增加新闻标题");
-                data_content.add("增加新闻内容");
+                data.add(new ListEntity(R.mipmap.ic_launcher, "增加新闻标题", "增加新闻内容"));
                 mlistViewAdpter.notifyDataSetChanged();
                 //结束动画
                 swipe_container.setLoading(false);
